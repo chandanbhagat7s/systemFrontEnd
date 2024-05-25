@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../../Components/Sidebar";
 import { Link } from "react-router-dom";
-import CollectorFillInformation from "../../Components/BranchComponents/Cpr/CollectorFillInformation";
+import InfoCards from "../../Components/BranchComponents/Cpr/InfoCards";
 
 export default function InfoCollectorDash({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -17,28 +17,34 @@ export default function InfoCollectorDash({ children }) {
             <ul className="space-y-2 ">
               <li
                 onClick={() => setTab(1)}
-                className={`p-4  rounded-xl bg-gray-900 text-center hover:font-bold my-2 hover:bg-gray-700 ${
-                  tab == 1 ? "bg-cyan-800 hover:bg-cyan-800 font-bold" : ""
+                className={`p-4  rounded-xl  text-center hover:font-bold my-2  ${
+                  tab == 1
+                    ? "bg-cyan-200 text-black font-bold "
+                    : "bg-cyan-600 hover:bg-cyan-700"
                 } cursor-pointer`}
               >
                 Dashboard
               </li>
               <li
                 onClick={() => setTab(2)}
-                className={`p-4  rounded-xl bg-gray-900 text-center hover:font-bold my-2 hover:bg-gray-700 ${
-                  tab == 2 ? "bg-cyan-800 hover:bg-cyan-800 font-bold" : ""
+                className={`p-4  rounded-xl  text-center hover:font-bold my-2  ${
+                  tab == 2
+                    ? "bg-cyan-200 text-black font-bold"
+                    : "bg-cyan-600 hover:bg-cyan-700"
                 } cursor-pointer`}
               >
-                Have New Information
+                Manage New Information
               </li>
 
               <li
                 onClick={() => setTab(3)}
-                className={`p-4   rounded-xl bg-gray-900 text-center hover:font-bold my-2 hover:bg-gray-700 ${
-                  tab == 3 ? "bg-cyan-800 hover:bg-cyan-800 font-bold" : ""
+                className={`p-4  rounded-xl  text-center hover:font-bold my-2  ${
+                  tab == 3
+                    ? "bg-cyan-200 text-black font-bold"
+                    : "bg-cyan-600 hover:bg-cyan-700"
                 } cursor-pointer`}
               >
-                Manage Informations
+                See old Informations
               </li>
             </ul>
           </nav>
@@ -53,7 +59,7 @@ export default function InfoCollectorDash({ children }) {
             {tab == 1 && <>Dashboard</>}
             {tab == 2 && (
               <>
-                <CollectorFillInformation />
+                <InfoCards confirmer={true} />
               </>
             )}
             {tab == 3 && <>Dashboard</>}

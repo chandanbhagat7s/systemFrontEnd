@@ -11,7 +11,6 @@ const Tabs = () => {
     <>
       <div className="flex justify-center space-x-4 px-2 py-4 bg-gray-200 text-sm ">
         <div
-          to="/form1"
           onClick={() => changetab(1)}
           className={`${
             tab == 1
@@ -22,7 +21,6 @@ const Tabs = () => {
           Information collector
         </div>
         <div
-          to="/form2"
           onClick={() => changetab(2)}
           className={`${
             tab == 2
@@ -33,7 +31,6 @@ const Tabs = () => {
           Information confirmer
         </div>
         <div
-          to="/form3"
           onClick={() => changetab(3)}
           className={`${
             tab == 3
@@ -45,9 +42,15 @@ const Tabs = () => {
         </div>
       </div>
       <div className="p-4">
-        {tab == 1 && <CreateAccountForms url="" />}
-        {tab == 2 && <CreateAccountForms url="" />}
-        {tab == 3 && <CreateAccountForms url="" />}
+        {tab == 1 && (
+          <CreateAccountForms url="/api/v1/branch/create/infoCollectorAccount" />
+        )}
+        {tab == 2 && (
+          <CreateAccountForms url="/api/v1/branch/create/infoConfirmerAccount" />
+        )}
+        {tab == 3 && (
+          <CreateAccountForms url="/api/v1/branch/create/accountentAccount" />
+        )}
       </div>
     </>
   );

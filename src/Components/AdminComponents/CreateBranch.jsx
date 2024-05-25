@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { error, success, warning } from "../../Redux/slices/errorslice";
 
-export default function CreateAccountForms({ url }) {
+export default function CreateBranch() {
   const dispatch = useDispatch();
   const [data, setData] = useState({
-    name: "",
+    Branchname: "",
     email: "",
     password: "",
+    BranchHolderName: "",
   });
   function handleChange(e) {
     const { name, value } = e.target;
@@ -20,26 +21,36 @@ export default function CreateAccountForms({ url }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      if (!data.name || !data.email || !data.password) {
+      if (
+        !data?.Branchname ||
+        !data?.email ||
+        !data?.password ||
+        !data?.BranchHolderName
+      ) {
         return dispatch(
           warning({
             message: "Please enter all the details",
           })
         );
       }
-      if (data.password.length < 8) {
+      if (data?.password?.length < 8) {
         return dispatch(
           warning({
             message: "Password is too short",
           })
         );
       }
-      const res = await axios.post(url, {
-        name: data.name,
-        email: data.email,
-        password: data.password,
+      const res = await axios.post("/api/v1/admin/createbranch", {
+        ...data,
       });
+      console.log(res);
       if (res?.data?.status == "success") {
+        setData({
+          Branchname: "",
+          email: "",
+          password: "",
+          BranchHolderName: "",
+        });
         return dispatch(
           success({
             message: res.data.msg,
@@ -65,30 +76,45 @@ export default function CreateAccountForms({ url }) {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 uppercase">
-        Creating <span className="text-blue-700">Account</span>{" "}
+        Create new <span className="text-blue-700">Branch</span>{" "}
       </h2>
       <form className="space-y-4 w-2/2 lg:w-2/3 mx-auto">
         <div>
           <label className="block mb-1 font-bold">
-            Name <sup className="text-red-400">*</sup>
+            New branch Name <sup className="text-red-400">*</sup>
           </label>
           <input
-            name="name"
+            name="Branchname"
             onChange={handleChange}
             type="text"
-            required="true"
+            required={true}
+            className="w-full p-2 border border-gray-300 rounded"
+            value={data.Branchname}
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-bold">
+            Branch account holder's name <sup className="text-red-400">*</sup>
+          </label>
+          <input
+            name="BranchHolderName"
+            onChange={handleChange}
+            type="text"
+            required={true}
+            value={data.BranchHolderName}
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
         <div>
           <label className="block mb-1 font-bold">
-            Email id <sup className="text-red-400">*</sup>
+            Branch account holder's email <sup className="text-red-400">*</sup>
           </label>
           <input
             name="email"
+            value={data.email}
             onChange={handleChange}
             type="email"
-            required
+            required={true}
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
@@ -99,8 +125,9 @@ export default function CreateAccountForms({ url }) {
           <input
             name="password"
             onChange={handleChange}
+            value={data.password}
             type="password"
-            required
+            required={true}
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>

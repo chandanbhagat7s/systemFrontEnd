@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginForm } from "../Redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { success, warning } from "../Redux/slices/errorslice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -27,12 +28,29 @@ const LoginForm = () => {
     }
     const res = await dispatch(loginForm(data));
     if (res?.payload?.data?.status == "success") {
+      dispatch(
+        success({
+          message: "Logged in successfully",
+        })
+      );
       const role = res?.payload?.data?.data?.role;
       if (role == "BRANCH_ADMIN") {
         nevigate("/dashboard/branch-admin");
       } else if (role == "CPR_COLLECTOR") {
         nevigate("/dashboard/infor-collector");
+      } else if (role == "CPR_CONFIRMER") {
+        nevigate("/dashboard/admission-confirmer");
+      } else if (role == "CPR_ACCOUNTENT") {
+        nevigate("/dashboard/accountent");
+      } else if (role == "ADMIN") {
+        nevigate("/dashboard/main-admin");
       }
+    } else {
+      dispatch(
+        warning({
+          message: res.payload.data.msg,
+        })
+      );
     }
   }
 
