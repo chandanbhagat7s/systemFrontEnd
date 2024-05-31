@@ -39,7 +39,14 @@ export default function CreateAccountForms({ url }) {
         email: data.email,
         password: data.password,
       });
+      console.log(res);
       if (res?.data?.status == "success") {
+        console.log(res);
+        setData({
+          name: "",
+          email: "",
+          password: "",
+        });
         return dispatch(
           success({
             message: res.data.msg,

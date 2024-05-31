@@ -12,6 +12,8 @@ import InfoConfirmer from "../Layout/Dashboards/InfoConfirmer";
 import ApproveInformation from "../Components/BranchComponents/Cpr/ApproveInformation";
 import AccountentDash from "../Layout/Dashboards/AccountentDash";
 import AdminDash from "../Layout/Dashboards/AdminDash";
+import TeacherDash from "../Layout/Dashboards/TeachersDash";
+import HeadOfTeacherDash from "../Layout/Dashboards/HeadOfTeacherDash";
 
 export default function Approuting() {
   return (
@@ -26,6 +28,15 @@ export default function Approuting() {
         <Route
           path="/dashboard/branch-admin"
           element={<BranchDash></BranchDash>}
+        ></Route>
+      </Route>
+      <Route element={<Authentication allow={["TEACHER"]} />}>
+        <Route path="/dashboard/teacher" element={<TeacherDash />}></Route>
+      </Route>
+      <Route element={<Authentication allow={["TEACHERS_HEAD"]} />}>
+        <Route
+          path="/dashboard/teachers-head"
+          element={<HeadOfTeacherDash />}
         ></Route>
       </Route>
 

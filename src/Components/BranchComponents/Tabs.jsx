@@ -40,6 +40,26 @@ const Tabs = () => {
         >
           Accountent
         </div>
+        <div
+          onClick={() => changetab(4)}
+          className={`${
+            tab == 4
+              ? "bg-blue-700 hover:bg-blue-700 hover:scale-110 font-bold text-white scale-110"
+              : "bg-blue-300 "
+          } px-4 cursor-pointer text-center rounded-xl py-2 hover:scale-105 hover:bg-blue-400`}
+        >
+          Head of Teachers
+        </div>
+        <div
+          onClick={() => changetab(5)}
+          className={`${
+            tab == 5
+              ? "bg-blue-700 hover:bg-blue-700 hover:scale-110 font-bold text-white scale-110"
+              : "bg-blue-300 "
+          } px-4 cursor-pointer text-center rounded-xl py-2 hover:scale-105 hover:bg-blue-400`}
+        >
+          Teachers
+        </div>
       </div>
       <div className="p-4">
         {tab == 1 && (
@@ -50,6 +70,12 @@ const Tabs = () => {
         )}
         {tab == 3 && (
           <CreateAccountForms url="/api/v1/branch/create/accountentAccount" />
+        )}
+        {tab == 4 && (
+          <CreateAccountForms url="/api/v1/branch/create/headOfTeacher" />
+        )}
+        {tab == 5 && (
+          <CreateAccountForms url="/api/v1/branch/create/teachersAccount" />
         )}
       </div>
     </>

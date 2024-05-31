@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "../../Components/Sidebar";
-import { Link } from "react-router-dom";
-import CreateAccounts from "../../Components/BranchComponents/CreateAccounts";
-import TaskForm from "../../Components/Tasks/TaskForm";
+import TasksRiviewAndRating from "../../Components/Tasks/TasksRiviewAndRating";
 
-export default function BranchDash({ children }) {
+export default function HeadOfTeacherDash({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [tab, setTab] = useState(1);
   return (
@@ -31,24 +29,7 @@ export default function BranchDash({ children }) {
                   tab == 2 ? "bg-blue-700 font-bold hover:bg-blue-700 " : ""
                 } cursor-pointer  rounded-xl bg-gray-900 text-center hover:font-bold my-2 hover:bg-gray-700`}
               >
-                Create Accounts
-              </li>
-
-              <li
-                onClick={() => setTab(3)}
-                className={`p-4 ${
-                  tab == 3 ? "bg-blue-700 font-bold hover:bg-blue-700 " : ""
-                } cursor-pointer   rounded-xl bg-gray-900 text-center hover:font-bold my-2 hover:bg-gray-700`}
-              >
-                Manage Accounts
-              </li>
-              <li
-                onClick={() => setTab(4)}
-                className={`p-4 ${
-                  tab == 4 ? "bg-blue-700 font-bold hover:bg-blue-700 " : ""
-                } cursor-pointer   rounded-xl bg-gray-900 text-center hover:font-bold my-2 hover:bg-gray-700`}
-              >
-                Create Task
+                Review submitted Task
               </li>
             </ul>
           </nav>
@@ -60,12 +41,12 @@ export default function BranchDash({ children }) {
             </button>
           </header>
           {tab == 1 && <>Dashboard</>}
+
           {tab == 2 && (
-            <>
-              <CreateAccounts />
-            </>
+            <div className="max-h-screen overflow-y-scroll">
+              <TasksRiviewAndRating />
+            </div>
           )}
-          {tab == 3 && <>Manage Accounts</>}
         </div>
       </div>
     </>
