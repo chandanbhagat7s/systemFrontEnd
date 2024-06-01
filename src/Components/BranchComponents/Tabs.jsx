@@ -40,6 +40,8 @@ const Tabs = () => {
         >
           Accountent
         </div>
+      </div>
+      <div className="flex justify-center space-x-4 px-2 py-4 bg-gray-200 text-sm ">
         <div
           onClick={() => changetab(4)}
           className={`${
@@ -60,7 +62,18 @@ const Tabs = () => {
         >
           Teachers
         </div>
+        <div
+          onClick={() => changetab(6)}
+          className={`${
+            tab == 6
+              ? "bg-blue-700 hover:bg-blue-700 hover:scale-110 font-bold text-white scale-110"
+              : "bg-blue-300 "
+          } px-4 cursor-pointer text-center rounded-xl py-2 hover:scale-105 hover:bg-blue-400`}
+        >
+          Principal
+        </div>
       </div>
+
       <div className="p-4">
         {tab == 1 && (
           <CreateAccountForms url="/api/v1/branch/create/infoCollectorAccount" />
@@ -76,6 +89,9 @@ const Tabs = () => {
         )}
         {tab == 5 && (
           <CreateAccountForms url="/api/v1/branch/create/teachersAccount" />
+        )}
+        {tab == 6 && (
+          <CreateAccountForms url="/api/v1/branch/create/principleAccount" />
         )}
       </div>
     </>

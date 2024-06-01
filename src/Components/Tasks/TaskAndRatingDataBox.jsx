@@ -90,11 +90,13 @@ export default function TaskAndRatingDataBox({ el }) {
         Object.entries(el?.taskData).map(([key, value], index) => {
           return (
             <>
-              <div key={index} className="mb-4">
-                <h3 className="text-lg font-semibold">{key}</h3>
-                <p className="text-md">{value}</p>
-                <hr className="border-blue-700 my-2" />
-              </div>
+              {value && (
+                <div key={index} className="mb-4">
+                  <h3 className="text-lg font-semibold">{key}</h3>
+                  <p className="text-md">{value}</p>
+                  <hr className="border-blue-700 my-2" />
+                </div>
+              )}
             </>
           );
         })}

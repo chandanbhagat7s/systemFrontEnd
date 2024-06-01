@@ -14,6 +14,7 @@ import AccountentDash from "../Layout/Dashboards/AccountentDash";
 import AdminDash from "../Layout/Dashboards/AdminDash";
 import TeacherDash from "../Layout/Dashboards/TeachersDash";
 import HeadOfTeacherDash from "../Layout/Dashboards/HeadOfTeacherDash";
+import PrincipalDash from "../Layout/Dashboards/PrincipalDash";
 
 export default function Approuting() {
   return (
@@ -38,6 +39,10 @@ export default function Approuting() {
           path="/dashboard/teachers-head"
           element={<HeadOfTeacherDash />}
         ></Route>
+      </Route>
+
+      <Route element={<Authentication allow={["PRINCIPAL"]} />}>
+        <Route path="/dashboard/principal" element={<PrincipalDash />}></Route>
       </Route>
 
       <Route element={<Authentication allow={["CPR_COLLECTOR"]} />}>

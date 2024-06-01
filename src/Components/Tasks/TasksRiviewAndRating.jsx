@@ -1,13 +1,20 @@
 import axios from "axios";
-import RatingTable from "./RatingTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskAndRatingDataBox from "./TaskAndRatingDataBox";
-import { useDispatch } from "react-redux";
-import { info } from "../../Redux/slices/errorslice";
+import { useDispatch, useSelector } from "react-redux";
+import { error, info } from "../../Redux/slices/errorslice";
+import Filters from "./Filters";
+import Spinner from "../Spinner";
 
 const TasksRiviewAndRating = () => {
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const [query, setQuery] = useState({
+    branch: "",
+    teachersId: "",
+  });
 
   async function getData(params) {
     try {
@@ -28,12 +35,48 @@ const TasksRiviewAndRating = () => {
     }
   }
 
-  data.length == 0 && getData();
+  async function getQueryData(params) {
+    try {
+      if (!query.branch || !query.teachersId) {
+        return dispatch(
+          error({
+            message: "Please select the options correctly",
+          })
+        );
+      }
+      const res = await axios.get(
+        `/api/v1/task/${query.branch}/${query.teachersId}`
+      );
 
-  //   useEffect(() => {}, [data]);
+      console.log(res);
+      if (res?.data?.status == "success") {
+        console.log(res?.data?.data);
+        setData([...res?.data?.data]);
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        info({
+          message: "something went wrong",
+        })
+      );
+    }
+  }
+
+  // data.length == 0 && getData();
+
+  useEffect(() => {
+    !query.teachersId ? getData() : getQueryData();
+  }, [query]);
   return (
     <div className="bg-blue-50 text-black  p-4">
+      <Filters query={query} setQuery={setQuery} />
       <div className="max-w-4xl mx-auto  rounded-lg shadow-lg">
+        {data.length == 0 && (
+          <>
+            <Spinner />
+          </>
+        )}
         {data.length > 0 &&
           data.map((el) => {
             console.log(el);
@@ -43,6 +86,30 @@ const TasksRiviewAndRating = () => {
                 key={el}
                 className="bg-blue-200 px-5 py-2 rounded-lg shadow-lg my-4"
               >
+                {auth?.data?.role == "TEACHERS_HEAD" && (
+                  <div className="border border-1 border-gray-400  p-2 rounded-xl">
+                    {` Teacher's rating on this task is   `}
+                    <span className="font-bold">
+                      {el?.teachersRatingScore || "Not rated"}{" "}
+                    </span>
+                  </div>
+                )}
+                {auth?.data?.role == "PRINCIPAL" && (
+                  <div className="flex flex-col space-y-2 ">
+                    <div className="border border-1 border-gray-400  p-2 rounded-xl">
+                      {` Teacher's rating on this task is   `}
+                      <span className="font-bold">
+                        {el?.teachersRatingScore || "Not rated"}{" "}
+                      </span>
+                    </div>
+                    <div className="border border-1 border-gray-400  p-2 rounded-xl">
+                      {` Head of Teacher's rating on this task is   `}
+                      <span className="font-bold">
+                        {el?.headOfTeachersRatingScore || "Not rated"}{" "}
+                      </span>
+                    </div>
+                  </div>
+                )}
                 <TaskAndRatingDataBox key={el} el={el} />
               </div>
             );

@@ -48,6 +48,8 @@ const LoginForm = () => {
         nevigate("/dashboard/teacher");
       } else if (role == "TEACHERS_HEAD") {
         nevigate("/dashboard/teachers-head");
+      } else if (role == "PRINCIPAL") {
+        nevigate("/dashboard/principal");
       }
     } else {
       dispatch(

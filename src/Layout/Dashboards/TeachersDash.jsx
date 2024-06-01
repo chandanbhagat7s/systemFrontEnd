@@ -11,6 +11,7 @@ export default function TeacherDash({ children }) {
         <Sidebar
           isOpen={sidebarOpen}
           toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+          dashOf={"teacher's"}
         >
           <nav className="px-3">
             <ul>
@@ -44,11 +45,14 @@ export default function TeacherDash({ children }) {
 
           {tab == 2 && (
             <>
-              <div className="max-h-screen overflow-y-scroll flex flex-col space-y-3 ">
+              <div className="max-h-screen overflow-y-scroll flex flex-col  pt-10 ">
                 <header className="App-header flex flex-col  px-5 py-2 ">
                   <h1 className="text-2xl font-bold mb-4 uppercase text-gray-600">
                     Submit Task
                   </h1>
+                  <p className="text-gray-400 uppercase text-sm">
+                    Need to submit 2 forms
+                  </p>
                   <TaskForm />
                 </header>
               </div>

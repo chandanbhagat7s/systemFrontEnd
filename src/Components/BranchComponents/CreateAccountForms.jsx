@@ -80,6 +80,7 @@ export default function CreateAccountForms({ url }) {
             Name <sup className="text-red-400">*</sup>
           </label>
           <input
+            value={data.name}
             name="name"
             onChange={handleChange}
             type="text"
@@ -92,6 +93,7 @@ export default function CreateAccountForms({ url }) {
             Email id <sup className="text-red-400">*</sup>
           </label>
           <input
+            value={data.email}
             name="email"
             onChange={handleChange}
             type="email"
@@ -104,6 +106,7 @@ export default function CreateAccountForms({ url }) {
             Password <sup className="text-red-400">*</sup>
           </label>
           <input
+            value={data.password}
             name="password"
             onChange={handleChange}
             type="password"

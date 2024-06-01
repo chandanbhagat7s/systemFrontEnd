@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { error } from "../../Redux/slices/errorslice";
+import { error, info } from "../../Redux/slices/errorslice";
 import RatingTable from "./RatingTable";
 import axios from "axios";
 
@@ -101,8 +101,70 @@ const TaskForm = () => {
         teacherRatingData: scores,
       });
       console.log(res);
-    } catch (error) {
-      console.log(error);
+      if (res.data.status == "success") {
+        setDisplay(1);
+        setData({
+          "Report date": "",
+          "Reports of In charge Assistant Coordinator": "",
+          "Remark of Reports of In charge Assistant Coordinator": "",
+          "Attendance of Faculties": "",
+          "Remark of Attendance of Faculties": "",
+          "Students Counselling Scheduled for": "",
+          "Total number of Students Counselling Scheduled": "",
+          "Remark of Scheduled Counselling (Scheduled)": "",
+          "Students Counselling Unscheduled for": "",
+          "Total number of Students Counselling Unscheduled": "",
+          "Remark of Scheduled Counselling (unScheduled)": "",
+          "Students Discussion": "",
+          "Remark of Students Discussion": "",
+          "Weekly Test Syllabus Declaration": "",
+          "Question Paper Setting follow-up from Faculties": "",
+          "Faculty Discussion": "",
+          "Remark of Faculty Discussion": "",
+          "Parents Calling": "",
+          "Total Count of Parents Calling": "",
+          "Regular Meeting with Students on Academic Development": "",
+          "Remark of Student Meeting": "",
+          "Lecture Scheduled on ERP": "",
+          "Total number of Lecture Scheduled on ERP": "",
+          "Follow up from Asst. Incharge": "",
+          "Remark of Follow up from Asst. Incharge": "",
+          "General Remark": "",
+        });
+        setScores({
+          "Academic & Non-Academic Planning and Academic Delivery co-ordination":
+            "",
+          "Faculty Co-ordinations": "",
+          "Students' Co-ordination, Counselling & Follow ups": "",
+          "Parents' Co-ordination, Counselling & Follow ups": "",
+          "Result Analysis and efforts for Improvement": "",
+          "Students' and Teachers' performance Reporting": "",
+          "Documentation and Maintenance of Record": "",
+          "Non-Academic Activities/Meetings/ Programs conducted": "",
+          "Innovations suggested for better Administration": "",
+          "Special efforts taken for better Academic Results": "",
+          "Special Efforts for Retention of Students": "",
+          "Reporting of Students' Expectations Lacunas in System": "",
+          "Relationship maintained (with Students, Parents, Staff Members, Management)":
+            "",
+          "Mandatory Admissions done": "",
+          "All Types of Requirement decisions and fulfillment": "",
+          "Timely Reporting to Management": "",
+        });
+
+        dispatch(
+          info({
+            message: res.data.msg,
+          })
+        );
+      }
+    } catch (e) {
+      console.log(e);
+      dispatch(
+        error({
+          message: "something went wrong please try again",
+        })
+      );
     }
 
     return;
@@ -116,8 +178,8 @@ const TaskForm = () => {
     <>
       {display == 1 ? (
         <>
-          <div className="pt-10 pb-20">
-            <form className="space-y-4 p-6">
+          <div className="pt-10 pb-20 ">
+            <form className="space-y-4 p-6 bg-blue-50 rounded-xl shadow-xl">
               <div>
                 <label className=" font-extrabold block text-sm font-medium text-gray-700">
                   Report Date{" "}
@@ -515,10 +577,10 @@ const TaskForm = () => {
                 />
               </div>
 
-              <div className="relative ">
+              <div className="flex ">
                 <button
                   onClick={handleSubmit}
-                  className="absolute right-0 font-bold rounded-full px-4 py-2 hover:text-white hover:bg-blue-700   cursor-pointer bg-blue-300"
+                  className=" mx-auto font-bold rounded-full px-4 py-2 hover:text-white hover:bg-blue-700   cursor-pointer bg-blue-300"
                 >
                   Next
                 </button>
@@ -527,22 +589,19 @@ const TaskForm = () => {
           </div>
         </>
       ) : (
-        <>
+        <div className="pt-3 pb-20 bg-blue-50 rounded-xl ">
           <RatingTable scores={scores} setScores={setScores} />
-        </>
-      )}
-
-      {display == 2 && (
-        <>
-          <div className="relative ">
-            <button
-              onClick={handleSubmit}
-              className="absolute right-0 font-bold rounded-full px-4 py-2 hover:text-white hover:bg-blue-700   cursor-pointer bg-blue-300"
-            >
-              Submit
-            </button>
-          </div>
-        </>
+          <>
+            <div className="flex pt-10">
+              <button
+                onClick={handleSubmit}
+                className="  mx-auto shadow-xl font-bold rounded-full px-4 py-2 hover:text-white hover:bg-blue-700   cursor-pointer bg-blue-300"
+              >
+                Submit
+              </button>
+            </div>
+          </>
+        </div>
       )}
     </>
   );

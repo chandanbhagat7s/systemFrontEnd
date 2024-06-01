@@ -1,6 +1,6 @@
 import React from "react";
 
-const Sidebar = ({ children, isOpen, toggleSidebar }) => {
+const Sidebar = ({ children, isOpen, toggleSidebar, dashOf }) => {
   return (
     <div
       className={`fixed inset-y-0 left-0 transform ${
@@ -8,7 +8,9 @@ const Sidebar = ({ children, isOpen, toggleSidebar }) => {
       } md:relative md:translate-x-0 transition-transform duration-200 ease-in-out bg-gray-800 text-white w-64 z-30`}
     >
       <div className="p-4">
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold uppercase">
+          {dashOf ? dashOf : ""} Dashboard
+        </h1>
         <button className="md:hidden mt-2 text-white" onClick={toggleSidebar}>
           Close Sidebar
         </button>

@@ -3,7 +3,7 @@ import Sidebar from "../../Components/Sidebar";
 import TasksRiviewAndRating from "../../Components/Tasks/TasksRiviewAndRating";
 import TaskList from "../../Components/Tasks/TaskList";
 
-export default function HeadOfTeacherDash({ children }) {
+export default function PrincipalDash({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [tab, setTab] = useState(1);
   return (
@@ -12,7 +12,7 @@ export default function HeadOfTeacherDash({ children }) {
         <Sidebar
           isOpen={sidebarOpen}
           toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-          dashOf="Head Of Teachers"
+          dashOf="PRINCIPAL"
         >
           <nav className="px-3">
             <ul>
