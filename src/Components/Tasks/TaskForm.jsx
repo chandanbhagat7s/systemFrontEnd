@@ -96,9 +96,16 @@ const TaskForm = () => {
     }
 
     try {
+      let teachersRatingScore = 0;
+      Object.values(scores).map((el) => {
+        if (el) {
+          teachersRatingScore += Number(el);
+        }
+      });
       const res = await axios.post("/api/v1/task/submitTaskWithRating", {
         taskData: data,
         teacherRatingData: scores,
+        teachersRatingScore,
       });
       console.log(res);
       if (res.data.status == "success") {
@@ -180,10 +187,10 @@ const TaskForm = () => {
         <>
           <div className="pt-10 pb-20 ">
             <form className="space-y-4 p-6 bg-blue-50 rounded-xl shadow-xl">
-              <div>
-                <label className=" font-extrabold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row ">
+                <label className=" basis-1 lg:basis-1/3 font-extrabold block text-sm font-medium text-gray-700">
                   Report Date{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
@@ -191,20 +198,20 @@ const TaskForm = () => {
                   onChange={handlechange}
                   name="Report date"
                   type="date"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className=" basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3  font-bold block text-sm font-medium text-gray-700">
                   Reports of In charge Assistant Coordinator{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Reports of In charge Assistant Coordinator"
                 >
                   <option value="">--Select--</option>
@@ -215,28 +222,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3  font-bold block text-sm font-medium text-gray-700">
                   Remark of Reports of In charge Assistant Coordinator
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Reports of In charge Assistant Coordinator"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3  font-bold block text-sm font-medium text-gray-700">
                   Attendance of Faculties{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Attendance of Faculties"
                 >
                   <option value="">--Select--</option>
@@ -248,28 +255,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3  font-bold block text-sm font-medium text-gray-700">
                   Remark of Attendance of Faculties
                 </label>
                 <input
                   onChange={handlechange}
                   type="text"
                   name="Remark of Attendance of Faculties"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3  font-bold block text-sm font-medium text-gray-700">
                   Students Counselling Scheduled for{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Students Counselling Scheduled for"
                 >
                   <option value="">--Select--</option>
@@ -280,40 +287,40 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Total number of Students Counselling Scheduled
                 </label>
                 <input
                   onChange={handlechange}
                   name="Total number of Students Counselling Scheduled"
                   type="number"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Remark of Scheduled Counselling
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Scheduled Counselling (Scheduled)"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Students Counselling Unscheduled for{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Students Counselling Unscheduled for"
                 >
                   <option value="">--Select--</option>
@@ -324,40 +331,40 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Total number of Students Counselling Unscheduled
                 </label>
                 <input
                   onChange={handlechange}
                   name="Total number of Students Counselling Unscheduled"
                   type="number"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Remark of Scheduled Counselling
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Scheduled Counselling (unScheduled)"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Students Discussion{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Students Discussion"
                 >
                   <option value="">--Select--</option>
@@ -368,28 +375,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Remark of Students Discussion
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Students Discussion"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Weekly Test Syllabus Declaration{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Weekly Test Syllabus Declaration"
                 >
                   <option value="">--Select--</option>
@@ -400,28 +407,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Question Paper Setting follow-up from Faculties
                 </label>
                 <input
                   onChange={handlechange}
                   name="Question Paper Setting follow-up from Faculties"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Faculty Discussion{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Faculty Discussion"
                 >
                   <option value="">--Select--</option>
@@ -433,28 +440,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Remark of Faculty Discussion
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Faculty Discussion"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Parents Calling{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Parents Calling"
                 >
                   <option value="">--Select--</option>
@@ -463,28 +470,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Total Count of Parents Calling
                 </label>
                 <input
                   onChange={handlechange}
                   name="Total Count of Parents Calling"
                   type="number"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Regular Meeting with Students on Academic Development{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Regular Meeting with Students on Academic Development"
                 >
                   <option value="">--Select--</option>
@@ -493,28 +500,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Remark of Student Meeting
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Student Meeting"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Lecture Scheduled on ERP{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Lecture Scheduled on ERP"
                 >
                   <option value="">--Select--</option>
@@ -523,28 +530,28 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Total number of Lecture Scheduled on ERP
                 </label>
                 <input
                   onChange={handlechange}
                   name="Total number of Lecture Scheduled on ERP"
                   type="number"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Follow up from Asst. Incharge{" "}
-                  <span className="font-extrabold text-red-700 ">
+                  <span className="font-extrabold text-red-700 text-2xl ">
                     <sup>*</sup>
                   </span>
                 </label>
                 <select
                   onChange={handlechange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                   name="Follow up from Asst. Incharge"
                 >
                   <option value="">--Select--</option>
@@ -553,31 +560,31 @@ const TaskForm = () => {
                 </select>
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   Remark of Follow up from Asst. Incharge
                 </label>
                 <input
                   onChange={handlechange}
                   name="Remark of Follow up from Asst. Incharge"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div>
-                <label className=" font-bold block text-sm font-medium text-gray-700">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row">
+                <label className=" basis-1 lg:basis-1/3 font-bold block text-sm font-medium text-gray-700">
                   General Remark
                 </label>
                 <input
                   onChange={handlechange}
                   name="General Remark"
                   type="text"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="basis-1 lg:basis-2/3 mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                 />
               </div>
 
-              <div className="flex ">
+              <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row ">
                 <button
                   onClick={handleSubmit}
                   className=" mx-auto font-bold rounded-full px-4 py-2 hover:text-white hover:bg-blue-700   cursor-pointer bg-blue-300"
@@ -592,7 +599,7 @@ const TaskForm = () => {
         <div className="pt-3 pb-20 bg-blue-50 rounded-xl ">
           <RatingTable scores={scores} setScores={setScores} />
           <>
-            <div className="flex pt-10">
+            <div className="flex flex-col space-y-2 lg:space-y-0 lg:items-center lg:flex-row pt-10">
               <button
                 onClick={handleSubmit}
                 className="  mx-auto shadow-xl font-bold rounded-full px-4 py-2 hover:text-white hover:bg-blue-700   cursor-pointer bg-blue-300"

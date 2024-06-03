@@ -10,6 +10,7 @@ const TasksRiviewAndRating = () => {
   const auth = useSelector((state) => state.auth);
   console.log(auth);
   const [data, setData] = useState([]);
+  const [reqested, setRequested] = useState(false);
   const dispatch = useDispatch();
   const [query, setQuery] = useState({
     branch: "",
@@ -24,6 +25,7 @@ const TasksRiviewAndRating = () => {
       if (res?.data?.status == "success") {
         console.log(res?.data?.data);
         setData([...res?.data?.data]);
+        setRequested(true);
       }
     } catch (error) {
       console.log(error);
@@ -52,6 +54,7 @@ const TasksRiviewAndRating = () => {
       if (res?.data?.status == "success") {
         console.log(res?.data?.data);
         setData([...res?.data?.data]);
+        setRequested(true);
       }
     } catch (error) {
       console.log(error);
@@ -72,10 +75,15 @@ const TasksRiviewAndRating = () => {
     <div className="bg-blue-50 text-black  p-4">
       <Filters query={query} setQuery={setQuery} />
       <div className="max-w-4xl mx-auto  rounded-lg shadow-lg">
-        {data.length == 0 && (
+        {data.length == 0 && !reqested && (
           <>
             <Spinner />
           </>
+        )}
+        {data.length == 0 && reqested && (
+          <div className="min-h-screen flex justify-center items-center text-3xl font-bold text-blue-500 ">
+            <div>No Task Found </div>
+          </div>
         )}
         {data.length > 0 &&
           data.map((el) => {
@@ -84,7 +92,7 @@ const TasksRiviewAndRating = () => {
             return (
               <div
                 key={el}
-                className="bg-blue-200 px-5 py-2 rounded-lg shadow-lg my-4"
+                className="bg-blue-100 px-5 py-4 rounded-lg shadow-lg my-4"
               >
                 {auth?.data?.role == "TEACHERS_HEAD" && (
                   <div className="border border-1 border-gray-400  p-2 rounded-xl">
@@ -105,7 +113,7 @@ const TasksRiviewAndRating = () => {
                     <div className="border border-1 border-gray-400  p-2 rounded-xl">
                       {` Head of Teacher's rating on this task is   `}
                       <span className="font-bold">
-                        {el?.headOfTeachersRatingScore || "Not rated"}{" "}
+                        {el?.HeadOfTachersRatingScore || "Not rated"}{" "}
                       </span>
                     </div>
                   </div>

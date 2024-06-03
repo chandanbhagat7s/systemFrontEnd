@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import RatingTable from "./RatingTable";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { info } from "../../Redux/slices/errorslice";
 
 export default function TaskAndRatingDataBox({ el }) {
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.auth);
   const [mode, setMode] = useState("data");
   const [scores, setScores] = useState({
     "Academic & Non-Academic Planning and Academic Delivery co-ordination": "",
@@ -28,11 +29,28 @@ export default function TaskAndRatingDataBox({ el }) {
   });
   async function handleSubmit(taskId) {
     try {
-      const res = await axios.post("/api/v1/task/submitRatingOnTaskByHead", {
-        taskId,
-        headRatingData: scores,
+      let rating = 0;
+      Object.values(scores).map((el) => {
+        if (el) {
+          rating += Number(el);
+        }
       });
-      console.log(res);
+      let res;
+
+      if (data?.role == "PRINCIPAL") {
+        res = await axios.post("/api/v1/task/submitRatingOnTaskByPrincipal", {
+          taskId,
+          headRatingData: scores,
+          principleRatingScore: rating,
+        });
+      } else {
+        res = await axios.post("/api/v1/task/submitRatingOnTaskByHead", {
+          taskId,
+          headRatingData: scores,
+          HeadOfTachersRatingScore: rating,
+        });
+        console.log(res);
+      }
 
       if (res.data.status == "success") {
         dispatch(
